@@ -1,31 +1,26 @@
 const usersWrapEl = document.querySelector('.user-wrap')
 
-export function UpdateUi(arr) {
-	// innerHTML += o'rniga, bitta marta qo'shamiz
+export function updateUi(arr) {
 	const html = arr
 		.map(
 			item => `
     <div class="user-card">
       <div class="user-card__header">
-        <div class="avatar">${item.name[0]}</div>
+        <div class="avatar">${item.id}</div>
         <div>
-          <h2>${item.userId}</h2>
-          <p>${item.id}</p>
+          <h2>Todo #${item.id}</h2>
+          <p>User ID: ${item.userId}</p>
         </div>
       </div>
 
       <div class="user-card__body">
         <p>${item.title}</p>
-        <p>${item.completed}</p>
+        <p>${item.completed ? 'Completed' : 'Not completed'}</p>
       </div>
     </div>
   `,
 		)
 		.join('')
 
-	usersWrapEl.innerHTML += html
-}
-
-window.goUsers = function (id) {
-	window.location.href = `http://127.0.0.1:5500/pages/users.html?id=${id}`
+	usersWrapEl.innerHTML = html
 }

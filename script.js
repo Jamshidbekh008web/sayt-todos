@@ -1,8 +1,6 @@
-import { UpdateUi } from './ui.js'
+import { updateUi } from './ui.js'
 
-const userEl = document.querySelector('.user')
-
-fetch('https://jsonplaceholder.typicode.com/todos')
-	.then(response => response.json())
-	.then(data => UpdateUi(data))
+fetch('https://jsonplaceholder.typicode.com/todos?_limit=20')
+	.then(res => res.json())
+	.then(data => updateUi(data))
 	.catch(err => console.log(err))

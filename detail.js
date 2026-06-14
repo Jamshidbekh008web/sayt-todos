@@ -1,17 +1,15 @@
-let id = Number(window.location.href.split('=').at(-1))
 const userEl = document.querySelector('.user')
-console.log(userEl)
 
-fetch('https://jsonplaceholder.typicode.com/todos/${id}')
-	.then(response => response.json())
+const id = new URLSearchParams(location.search).get('id')
 
+fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+	.then(res => res.json())
 	.then(data => detailUi(data))
 	.catch(err => console.log(err))
 
 function detailUi(obj) {
-	console.log(obj)
-
-	userEl.innerHTML = `<div class="user-detail">
+	userEl.innerHTML = `
+    <div class="user-detail">
       <div class="profile">
         <div class="avatar">${obj.name[0]}</div>
         <div>
@@ -19,6 +17,7 @@ function detailUi(obj) {
           <p>@${obj.username}</p>
         </div>
       </div>
+
       <div class="section">
         <h2>Contact Information</h2>
         <div class="info-grid">
@@ -32,10 +31,11 @@ function detailUi(obj) {
           </div>
           <div class="info">
             <span>Website</span>
-            <p>${obj.wepsite}</p>
+            <p>${obj.website}</p>
           </div>
         </div>
       </div>
+
       <div class="section">
         <h2>Address</h2>
         <div class="info-grid">
@@ -57,11 +57,12 @@ function detailUi(obj) {
           </div>
         </div>
       </div>
+
       <div class="section">
         <h2>Company</h2>
         <div class="info-grid">
           <div class="info">
-            <span>Company Name</span>
+            <span>Name</span>
             <p>${obj.company.name}</p>
           </div>
           <div class="info">
@@ -75,5 +76,5 @@ function detailUi(obj) {
         </div>
       </div>
     </div>
-    `
+  `
 }
